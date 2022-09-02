@@ -7,10 +7,10 @@ It is used to demonstrate migration path from TF 0.12 with Aiven provider 1.3.5 
 ### Service map
 
 ```
-                                       ┌──────────────┐
-                                       │   Kibana     │
-                                       │              │
-                                       └───────▲──────┘
+                                       ┌──────────────────────────┐
+                                       │ OpenSearch Dashboard     │
+                                       │                          │
+                                       └───────▲──────────────────┘
                                                │
                                        ┌───────┴──────┐
                                        │              │
@@ -29,11 +29,11 @@ It is used to demonstrate migration path from TF 0.12 with Aiven provider 1.3.5 
       │      │                           │     │     │                │         │
       │      │                         ┌─┘     │     │                │      ┌──┴──────┐
       │      │                         │       │     │                │      │         │
-      │      │                         │       │     └────Metrics─────┼──────┤  Redis  │
+      │      │                         │       │     └────Metrics─────┼──────┤  Redis® │
       │      │                         │       │                      │      │         │
       │      │                         │       │                      │      └──────▲──┘
 ┌─────┴──────┴─┐  ┌────────────────┐   │       │                      │             │
-│   Postgres   │  │  Postgres      │   │       │                      │             │
+│  PostgreSQL  │  │   PostgreSQL   │   │       │                      │             │
 │   Cluster    ├──►  Read Replica  │   │       │                      │             │
 │              │  │                ├───┘       │                      │             │
 └─────▲────────┘  └────────────────┘           └─┐                    │             │
@@ -45,18 +45,18 @@ It is used to demonstrate migration path from TF 0.12 with Aiven provider 1.3.5 
       │                                          │                    │             │
       │                                      ┌───┴───────────┐        │             │
       │                                      │               │        │             │
-      │                                      │   Kafka       │        │             │
+      │                                      │ Apache Kafka® │        │             │     
       │                                      │               ├─Logs───┘             │
       │                                      │               │                      │
       │                                      └──────▲────────┘                      │
       │                                             │                               │
       │                                    ┌────────┴──────────┐                    │
       │                                    │                   │                    │
-      │                                    │    Kafka Connect  │                    │
+      │                                    │  Kafka® Connect   │                    │
       │                        ┌───────────┼──────┐        ┌───┼───────────┐        │
       │                        │           │xxxxxx│        │xxx│           │        │
       │                        │           └──────┼────────┼───┘           │        │
-      └────────────────────────┤     Debezium     │        │  Redis  Sink  ├────────┘
+      └────────────────────────┤     Debezium     │        │  Redis®  Sink ├────────┘
                                │                  │        │               │
                                │                  │        │               │
                                └──────────────────┘        └───────────────┘
