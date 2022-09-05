@@ -7,10 +7,10 @@ It is used to demonstrate migration path from TF 0.12 with Aiven provider 1.3.5 
 ### Service map
 
 ```
-                                       ┌──────────────┐
-                                       │   Kibana     │
-                                       │              │
-                                       └───────▲──────┘
+                                       ┌──────────────────────┐
+                                       │ OpenSearch Dashboard │
+                                       │                      │
+                                       └───────▲──────────────┘
                                                │
                                        ┌───────┴──────┐
                                        │              │
@@ -22,18 +22,18 @@ It is used to demonstrate migration path from TF 0.12 with Aiven provider 1.3.5 
       │                                        │                        │       │
       │                                 ┌──────▼──────┐  ┌───────────┐  │       │
       │                                 │             │  │           │  │       │
-      │                                 │   InfluxDB  ├──►  Grafana  │  │       │
+      │                                 │  InfluxDB®  ├──►  Grafana® │  │       │
       │      ┌───────Metrics────────────►             │  │           │  │       │
       │      │                          └▲─────▲─────▲┘  └───────────┘  │       │
       │      │                           │     │     │                ┌─┘       │
       │      │                           │     │     │                │         │
       │      │                         ┌─┘     │     │                │      ┌──┴──────┐
       │      │                         │       │     │                │      │         │
-      │      │                         │       │     └────Metrics─────┼──────┤  Redis  │
+      │      │                         │       │     └────Metrics─────┼──────┤  Redis® │
       │      │                         │       │                      │      │         │
       │      │                         │       │                      │      └──────▲──┘
 ┌─────┴──────┴─┐  ┌────────────────┐   │       │                      │             │
-│   Postgres   │  │  Postgres      │   │       │                      │             │
+│  PostgreSQL® │  │  PostgreSQL®   │   │       │                      │             │
 │   Cluster    ├──►  Read Replica  │   │       │                      │             │
 │              │  │                ├───┘       │                      │             │
 └─────▲────────┘  └────────────────┘           └─┐                    │             │
@@ -45,18 +45,18 @@ It is used to demonstrate migration path from TF 0.12 with Aiven provider 1.3.5 
       │                                          │                    │             │
       │                                      ┌───┴───────────┐        │             │
       │                                      │               │        │             │
-      │                                      │   Kafka       │        │             │
+      │                                      │ Apache Kafka® │        │             │
       │                                      │               ├─Logs───┘             │
       │                                      │               │                      │
       │                                      └──────▲────────┘                      │
       │                                             │                               │
       │                                    ┌────────┴──────────┐                    │
       │                                    │                   │                    │
-      │                                    │    Kafka Connect  │                    │
+      │                                    │   Kafka Connect®  │                    │
       │                        ┌───────────┼──────┐        ┌───┼───────────┐        │
       │                        │           │xxxxxx│        │xxx│           │        │
       │                        │           └──────┼────────┼───┘           │        │
-      └────────────────────────┤     Debezium     │        │  Redis  Sink  ├────────┘
+      └────────────────────────┤     Debezium     │        │  Redis  Sink® ├────────┘
                                │                  │        │               │
                                │                  │        │               │
                                └──────────────────┘        └───────────────┘
@@ -222,7 +222,7 @@ Migration strategy – since `aiven_service` and `aiven_x`, i.e. `aiven_mysql` a
 
 So... We would have to change the code first, remove old resource from the state and then import already existing service to the terraform state. Please check below for more information.
 
-**Kafka**
+**Apache Kafka®**
 
 To change from the old `aiven_service` to the new `aiven_kafka` resource, resource type should be changed as well as `service_type` should be removed.
 
@@ -245,7 +245,7 @@ resource "aiven_service_user" "kafka_user" {
 }
 ```
 
-**Kafka Connect**
+**Kafka Connect®**
 
 We follow the same principle here as in `aiven_kafka` or any other resource.
 
@@ -284,7 +284,7 @@ output "service_name" {
 }
 ```
 
-**Postgres**
+**PostgreSQL®**
 
 We follow the same principle here as described above.
 
@@ -357,7 +357,7 @@ We follow the same principle here as described above.
 }
 ```
 
-**InfluxDB**
+**InfluxDB®**
 
 We follow the same principle here as described above.
 
